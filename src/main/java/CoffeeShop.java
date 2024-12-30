@@ -21,17 +21,12 @@ public class CoffeeShop {
         notifyAll();
     }
 
-    public void prepareOrder() throws InterruptedException{
+    public synchronized void prepareOrder() throws InterruptedException{
         //if 0 wait
         while(orderQueue.isEmpty()){
             //not in correct state to do operation
             wait();
         }
-        //now in correct state to do operation
-        //update resource variables | update state indicator
-        String order = orderQueue.poll();
-        System.out.println("order prepared: " + order);
-        //notify
         notifyAll();
     }
 }
