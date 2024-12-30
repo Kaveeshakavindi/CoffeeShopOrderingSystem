@@ -1,4 +1,3 @@
-package PACKAGE_NAME;
+public class Customer extends Thread{
 
-public class Customer {
 }
