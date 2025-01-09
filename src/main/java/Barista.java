@@ -1,21 +1,22 @@
-public class Barista extends Thread{
-    private CoffeeShop coffeeShop;
+class Barista implements Runnable {
+    private final CoffeeShop coffeeShop;
 
     public Barista(CoffeeShop coffeeShop) {
         this.coffeeShop = coffeeShop;
     }
+
     @Override
     public void run() {
-        //purpose of while(true) : simulates real life coffee shop that prepares orders until interruption happens(exception)
-        while(true){
-            try{
+        try {
+            //continuously process orders
+            while (true) {
+                //barista prepares an order from the queue
                 coffeeShop.prepareOrder();
+                Thread.sleep(1000);
             }
-            catch (InterruptedException e){
-                e.printStackTrace();
-                Thread.currentThread().interrupt();
-                break;
-            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.err.println("Barista thread interrupted.");
         }
     }
 }
